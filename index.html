@@ -76,10 +76,17 @@
     </style>
 </head>
 <body>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="your-music.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="countdown-container">
         <h1 id="time-remaining">Time Remaining To Open 😝</h1>
         <div id="countdown"></div>
     </div>
+    
     <div id="password-box">
         <p id="password-prompt">Enter the 4 numbers which I use as a password everywhere:</p>
         <div class="password-container">
@@ -91,7 +98,7 @@
         <button id="submit-button" onclick="checkPassword()">Submit</button>
         <p id="error-message">Try again IK YK this</p>
     </div>
-    
+
     <script>
         const countdownElement = document.getElementById("countdown");
         const countdownContainer = document.getElementById("countdown-container");
@@ -101,7 +108,7 @@
         const errorMessage = document.getElementById("error-message");
 
         const targetDate = new Date("October 25, 2025 00:00:00").getTime();
-        
+
         function updateCountdown() {
             const now = new Date().getTime();
             const timeLeft = targetDate - now;
@@ -121,13 +128,13 @@
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
+
             countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
-        
+
         setInterval(updateCountdown, 1000);
         updateCountdown();
-        
+
         passwordInputs.forEach((input, index) => {
             input.addEventListener("input", (e) => {
                 if (e.target.value && index < passwordInputs.length - 1) {
@@ -135,7 +142,7 @@
                 }
             });
         });
-        
+
         function checkPassword() {
             const enteredPassword = Array.from(passwordInputs).map(input => input.value).join("");
             if (enteredPassword === "2510") {
@@ -148,42 +155,48 @@
         }
     </script>
 
-
-        <!-- Background Music Player (Hidden) -->
-    <audio id="bg-music" loop>
-        <source src="gana.mp3" type="audio/mpeg">
-    </audio>
-
+    <!-- Improved Background Music Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let audio = document.getElementById("bg-music");
 
-            // Check if the user already played the music
-            let isPlaying = localStorage.getItem("isMusicPlaying");
-            let currentTime = localStorage.getItem("musicTime");
+            // Check if music was playing before
+            let isPlaying = sessionStorage.getItem("isMusicPlaying");
+            let currentTime = sessionStorage.getItem("musicTime");
 
             if (isPlaying === "true") {
                 if (currentTime) {
-                    audio.currentTime = currentTime; // Restore time position
+                    audio.currentTime = currentTime; // Resume from last position
                 }
-                audio.play();
+                audio.play().catch(() => {
+                    console.warn("Autoplay blocked! Waiting for user interaction.");
+                });
             }
 
-            // Play music when the user interacts
-            document.body.addEventListener("click", function () {
+            // Play music when user interacts (first click/tap only)
+            function startMusic() {
                 if (audio.paused) {
                     audio.play();
-                    localStorage.setItem("isMusicPlaying", "true");
+                    sessionStorage.setItem("isMusicPlaying", "true");
                 }
+                document.removeEventListener("click", startMusic); // Remove event listener after first click
+            }
+            document.addEventListener("click", startMusic);
+
+            // Save playback position before navigating
+            window.addEventListener("beforeunload", function () {
+                sessionStorage.setItem("musicTime", audio.currentTime);
             });
 
-            // Save playback position before leaving the page
-            window.addEventListener("beforeunload", function () {
-                localStorage.setItem("musicTime", audio.currentTime);
-            });
+            // Pause background music when another media (audio/video) is played
+            document.addEventListener("play", function (event) {
+                if ((event.target.tagName === "AUDIO" || event.target.tagName === "VIDEO") && event.target !== audio) {
+                    audio.pause();
+                    sessionStorage.setItem("isMusicPlaying", "false");
+                }
+            }, true);
         });
     </script>
+
 </body>
 </html>
-
-
