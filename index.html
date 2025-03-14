@@ -147,30 +147,43 @@
             }
         }
     </script>
+
+
+        <!-- Background Music Player (Hidden) -->
+    <audio id="bg-music" loop>
+        <source src="gana.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("bg-music");
+
+            // Check if the user already played the music
+            let isPlaying = localStorage.getItem("isMusicPlaying");
+            let currentTime = localStorage.getItem("musicTime");
+
+            if (isPlaying === "true") {
+                if (currentTime) {
+                    audio.currentTime = currentTime; // Restore time position
+                }
+                audio.play();
+            }
+
+            // Play music when the user interacts
+            document.body.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play();
+                    localStorage.setItem("isMusicPlaying", "true");
+                }
+            });
+
+            // Save playback position before leaving the page
+            window.addEventListener("beforeunload", function () {
+                localStorage.setItem("musicTime", audio.currentTime);
+            });
+        });
+    </script>
 </body>
 </html>
 
 
-<audio id="bg-music" loop>
-    <source src="gana.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let audio = document.getElementById("bg-music");
-
-        // Retrieve saved playback position
-        let currentTime = localStorage.getItem("musicTime");
-        if (currentTime) {
-            audio.currentTime = currentTime;
-        }
-
-        // Start playing
-        audio.play();
-
-        // Save playback position before leaving the page
-        window.addEventListener("beforeunload", function () {
-            localStorage.setItem("musicTime", audio.currentTime);
-        });
-    });
-</script>
