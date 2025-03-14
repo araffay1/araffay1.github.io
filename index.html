@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <frameset rows="0, *">
+    <frame src="music.html" noresize scrolling="no">
+    <frame src="home.html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown Timer</title>
@@ -140,45 +143,4 @@
     </script>
 </body>
 </html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-</head>
-<body>
-
-    <h1>Welcome to My Website</h1>
-    <p>This is my homepage.</p>
-
-    <script>
-        // Check if an existing audio player is running
-        window.onload = function() {
-            if (!window.audioPlayer) {
-                // Create an audio element and set attributes
-                window.audioPlayer = new Audio("gana.mp3");
-                window.audioPlayer.loop = true; // Loop the music
-                window.audioPlayer.autoplay = true;
-
-                // Store reference in localStorage
-                localStorage.setItem("audioPlaying", "true");
-
-                // Play the audio
-                window.audioPlayer.play();
-
-                // Ensure it continues playing across pages
-                document.addEventListener("visibilitychange", function() {
-                    if (document.visibilityState === "visible" && localStorage.getItem("audioPlaying") === "true") {
-                        window.audioPlayer.play();
-                    }
-                });
-            }
-        };
-    </script>
-
-</body>
-</html>
-
 
