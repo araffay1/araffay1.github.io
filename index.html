@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
+    <title>Countdown</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,7 +28,7 @@
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
+            min-width: 250px;
         }
         #countdown {
             font-size: 2em;
@@ -81,7 +81,7 @@
         <div id="countdown"></div>
     </div>
     <div id="password-box">
-        <p id="password-prompt">Enter the 4 numbers which i use as a password ever where like my phone etc:</p>
+        <p id="password-prompt">Enter the 4 numbers which I use as a password everywhere:</p>
         <div class="password-container">
             <input type="text" class="password-input" maxlength="1">
             <input type="text" class="password-input" maxlength="1">
@@ -99,9 +99,13 @@
         const timeRemainingText = document.getElementById("time-remaining");
         const passwordInputs = document.querySelectorAll(".password-input");
         const errorMessage = document.getElementById("error-message");
-        let timeLeft = 30; 
+
+        const targetDate = new Date("October 25, 2025 00:00:00").getTime();
         
         function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
             if (timeLeft <= 0) {
                 timeRemainingText.classList.add("fade-out");
                 countdownContainer.classList.add("fade-out");
@@ -112,8 +116,13 @@
                 }, 1000);
                 return;
             }
-            countdownElement.innerHTML = `${timeLeft}s`;
-            timeLeft--;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
         
         setInterval(updateCountdown, 1000);
@@ -140,4 +149,3 @@
     </script>
 </body>
 </html>
-
