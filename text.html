@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨ Special Birthday Wish ✨</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -33,7 +32,6 @@
         .glass-container {
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 25px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15),
                         inset 0 0 20px rgba(255, 255, 255, 0.5);
@@ -48,33 +46,6 @@
             z-index: 10;
         }
 
-        .glass-container:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                to right, 
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            transform: skewX(-25deg);
-            transition: all 0.7s ease;
-        }
-
-        .glass-container:hover:before {
-            animation: shine 1.5s;
-        }
-
-        @keyframes shine {
-            100% {
-                left: 125%;
-            }
-        }
-
         .message {
             font-size: 1.8rem;
             color: #6a4c93;
@@ -82,11 +53,6 @@
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
             opacity: 1;
             transition: opacity 0.5s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
         .hidden {
@@ -94,68 +60,17 @@
             position: absolute;
         }
 
-        .enter-button {
-            margin-top: 2rem;
-            background: linear-gradient(45deg, #ff9fb2, #ffb3c6);
-            color: white;
-            font-weight: 700;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 159, 178, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            z-index: 10;
-        }
-
-        .enter-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 7px 20px rgba(255, 159, 178, 0.6);
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .heart {
+        .top-emoji {
             position: absolute;
-            pointer-events: none;
-            opacity: 0;
+            top: 20px;
+            font-size: 2rem;
+            animation: topEmojiFloat 4s ease-in-out infinite;
+            z-index: 1;
         }
 
-        .decoration {
-            position: absolute;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .bubble {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-            animation: bubbleFloat 15s linear infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes bubbleFloat {
-            0% { transform: translateY(100vh) scale(0.3); opacity: 0.3; }
-            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        @keyframes topEmojiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
         }
 
         .side-decoration {
@@ -190,84 +105,10 @@
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(10px); }
         }
-
-        .gif-container {
-            margin-top: 2rem;
-            width: 90%;
-            max-width: 350px;
-            height: 200px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            opacity: 0;
-            transform: translateY(20px);
-            position: relative;
-            z-index: 5;
-        }
-
-        .gif-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-        }
-
-        .top-emoji {
-            position: absolute;
-            top: 20px;
-            font-size: 2rem;
-            animation: topEmojiFloat 4s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes topEmojiFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(10deg); }
-        }
-
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-            .side-decoration {
-                width: 50px;
-            }
-            
-            .side-item {
-                font-size: 1.5rem;
-            }
-            
-            .glass-container {
-                padding: 1.5rem;
-            }
-            
-            .message {
-                font-size: 1.4rem;
-            }
-            
-            .gif-container {
-                height: 150px;
-            }
-            
-            .top-emoji {
-                font-size: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .side-decoration {
-                width: 30px;
-            }
-            
-            .side-item {
-                font-size: 1rem;
-            }
-            
-            .message {
-                font-size: 1.2rem;
-            }
-        }
     </style>
 </head>
-<body class="px-4">
+<body>
+
     <!-- Top floating emojis -->
     <span class="top-emoji" style="left: 15%;">✨</span>
     <span class="top-emoji" style="left: 35%;">🎂</span>
@@ -276,77 +117,35 @@
 
     <!-- Side decorations - left -->
     <div class="side-decoration left">
-        <span class="side-item" style="--delay: 0.2;">😋</span>
+        <span class="side-item" style="--delay: 0.2;">💘</span>
         <span class="side-item" style="--delay: 0.5;">💖</span>
-        <span class="side-item" style="--delay: 0.8;">😝</span>
+        <span class="side-item" style="--delay: 0.8;">😋</span>
         <span class="side-item" style="--delay: 1.1;">✨</span>
-        <span class="side-item" style="--delay: 1.4;">🥰</span>
+        <span class="side-item" style="--delay: 1.4;">😍</span>
     </div>
 
     <!-- Side decorations - right -->
     <div class="side-decoration right">
-        <span class="side-item" style="--delay: 0.3;">😍</span>
-        <span class="side-item" style="--delay: 0.6;">😋</span>
+        <span class="side-item" style="--delay: 0.3;">🌟</span>
+        <span class="side-item" style="--delay: 0.6;">🥰</span>
         <span class="side-item" style="--delay: 0.9;">🎀</span>
         <span class="side-item" style="--delay: 1.2;">🌸</span>
         <span class="side-item" style="--delay: 1.5;">💝</span>
     </div>
 
-    <!-- Decorative elements -->
-    <div id="decorations"></div>
-
     <!-- Main container -->
     <div class="glass-container floating" id="messageContainer">
-        <p class="message" id="initialMessage">✨ I have something for you... 💫</p>
-        <p class="message hidden" id="secondMessage">🥺 YAYAYAYYYAYYAA Its your special dayy 😋😋 💕</p>
-    </div>
-
-    
-    </button>
-
-    
-    
+        <p class="message" id="initialMessage">Click me 🤓</p>
+        <p class="message hidden" id="secondMessage">Happy Birthday Zynab. So ive been writing this and making this website for a couple of months now like its been smth around 7-8 months if i am giving u this at your bday so this might have sm old things and sm new things at the end as ill add em on as the time goes. Sooo khair ik its already taking up much of your time soo ill cut it short. Zynabb u are thee mostt sweetest prn ive ever met, its likee thank u zynab thank u for bein my frnd for being the prsn i could talk to whenever ik ke i need sm1 thank you for being the perfect frnd and the perfect prsn for me. ik our fs has had many ups and downs but am glad that we are still frnds like smtimes i can not actually beleive it ke we r still so good frnds and so closee likee that trust uffff. I hope balke i hope nahi this fs i am never gonna let this fs end ever cuz i cant loose u ever at all and thats final,if ur bored by me or annoyed sure baat kam kardena but i can loose u forever aint happening. i cant    make this too long cuz of the limit on the website itna fit nahi kar sakta to i js wanna say THANK YOU ZYNAB THANK U SO MUCH. </p>
     </div>
 
     <script>
-        // Create decorative elements
-        function createDecorations() {
-            const decorationsContainer = document.getElementById('decorations');
-            
-            // Create floating bubbles
-            for (let i = 0; i < 20; i++) {
-                const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-                
-                // Random properties
-                const size = Math.random() * 60 + 20;
-                const posX = Math.random() * 100;
-                const delay = Math.random() * 20;
-                const duration = Math.random() * 10 + 10;
-                
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                bubble.style.left = `${posX}%`;
-                bubble.style.animationDuration = `${duration}s`;
-                bubble.style.animationDelay = `${delay}s`;
-                
-                decorationsContainer.appendChild(bubble);
-            }
-        }
-
-        // Initialize elements
         document.addEventListener('DOMContentLoaded', () => {
-            createDecorations();
-            
             const messageContainer = document.getElementById('messageContainer');
             const initialMessage = document.getElementById('initialMessage');
             const secondMessage = document.getElementById('secondMessage');
-            const enterButton = document.getElementById('enterButton');
-            const gifContainer = document.getElementById('gifContainer');
-            
-            // Click handler for container
+
             messageContainer.addEventListener('click', () => {
-                // Transition messages with GSAP
                 gsap.to(initialMessage, {
                     opacity: 0,
                     y: -20,
@@ -358,104 +157,29 @@
                             {opacity: 0, y: 20},
                             {opacity: 1, y: 0, duration: 0.5}
                         );
-                        
-                        // Show the enter button
-                        gsap.to(enterButton, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.8,
-                            delay: 0.3
-                        });
-                        
-                        // Show the GIF container
-                       
-                        });
                     }
                 });
-                
-                // Create hearts animation
-                createHearts();
             });
-            
-            // Heartbeat animation for button
-            enterButton.addEventListener('mouseenter', () => {
-                gsap.to(enterButton, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    repeat: 1,
-                    yoyo: true
-                });
-            });
-            
-            // Create hearts effect
-            function createHearts() {
-                const emojis = ['❤️', '💖', '💕', '💓', '💗', '💘', '💝'];
-                
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => {
-                        const heart = document.createElement('div');
-                        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-                        heart.innerHTML = randomEmoji;
-                        heart.classList.add('heart');
-                        heart.style.fontSize = `${Math.random() * 20 + 10}px`;
-                        
-                        // Position around the container
-                        const containerRect = messageContainer.getBoundingClientRect();
-                        const startX = containerRect.x + Math.random() * containerRect.width;
-                        const startY = containerRect.y + containerRect.height;
-                        
-                        heart.style.left = `${startX}px`;
-                        heart.style.top = `${startY}px`;
-                        
-                        document.body.appendChild(heart);
-                        
-                        // Animate the heart
-                        gsap.to(heart, {
-                            y: -150 - Math.random() * 100,
-                            x: (Math.random() - 0.5) * 100,
-                            opacity: 0,
-                            rotation: Math.random() * 90 - 45,
-                            duration: 2 + Math.random() * 3,
-                            ease: "power1.out",
-                            onComplete: () => {
-                                heart.remove();
-                            }
-                        });
-                        
-                        gsap.to(heart, {
-                            scale: 0.5,
-                            duration: 2,
-                            ease: "power1.in"
-                        });
-                    }, i * 100);
-                }
-            }
-            
-
-                
-                // For demonstration, we'll just add a celebratory effect
-                gsap.to(document.body, {
-                    backgroundColor: "#ffd6e0",
-                    duration: 0.5,
-                    yoyo: true,
-                    repeat: 1
-                });
-                
-                // Zoom effect on GIF
-                gsap.to(gifContainer, {
-                    scale: 1.1,
-                    duration: 0.5,
-                    yoyo: true,
-                    repeat: 1
-                });
-                
-                createHearts();
-            });
-            
-            // Initialize with hidden elements
-            gsap.set(enterButton, {opacity: 0, y: 20});
-            gsap.set(gifContainer, {opacity: 0, y: 20});
         });
     </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
