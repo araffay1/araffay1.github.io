@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             padding: 20px;
         }
-        iframe {
+        #player-container {
             display: none;
         }
     </style>
@@ -20,6 +20,18 @@
     <h1>Do not close this tab!</h1>
     <p>Music is playing. Head back to the previous tab and continue with the website.</p>
     
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/GvXDq-P1NB8?autoplay=1&loop=1&playlist=GvXDq-P1NB8" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    <button id="playButton">Play Music</button>
+    <div id="player-container">
+        <iframe id="musicPlayer" width="0" height="0" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    </div>
+    
+    <script>
+        document.getElementById('playButton').addEventListener('click', function() {
+            let player = document.getElementById('musicPlayer');
+            player.src = "https://www.youtube.com/embed/GvXDq-P1NB8?autoplay=1&loop=1&playlist=GvXDq-P1NB8";
+            document.getElementById('player-container').style.display = 'block';
+            this.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
