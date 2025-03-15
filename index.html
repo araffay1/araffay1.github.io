@@ -133,37 +133,29 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        passwordInputs.forEach((input, index) => {
-            input.addEventListener("input", (e) => {
-                if (e.target.value && index < passwordInputs.length - 1) {
-                    passwordInputs[index + 1].focus();
-                }
-            });
-        });
-        
-        function checkPassword() {
-            const enteredPassword = Array.from(passwordInputs).map(input => input.value).join("");
-            if (enteredPassword === "2510") {
-                window.location.href = "index1.html";
-            } else {
-                errorMessage.style.display = "block";
-                passwordInputs.forEach(input => input.value = "");
-                passwordInputs[0].focus();
-            }
-        }
-
         document.addEventListener("DOMContentLoaded", function () {
             let audio = document.getElementById("bg-music");
             let savedTime = localStorage.getItem("musicTime") || 0;
             let isPlaying = localStorage.getItem("isPlaying") === "true";
 
             audio.currentTime = savedTime;
-            if (isPlaying) {
-                audio.play().catch(err => console.log("Autoplay blocked:", err));
+
+            function startMusic() {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        localStorage.setItem("isPlaying", "true");
+                    }).catch(err => console.log("Autoplay blocked:", err));
+                }
+                document.removeEventListener("click", startMusic);
+                document.removeEventListener("touchstart", startMusic);
             }
 
-            audio.onplay = () => localStorage.setItem("isPlaying", "true");
-            audio.onpause = () => localStorage.setItem("isPlaying", "false");
+            document.addEventListener("click", startMusic);
+            document.addEventListener("touchstart", startMusic);
+
+            if (isPlaying) {
+                startMusic();
+            }
 
             setInterval(() => {
                 if (!audio.paused) {
