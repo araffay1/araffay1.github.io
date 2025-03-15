@@ -6,23 +6,49 @@
     <title>Background Music</title>
     <style>
         body {
-            background-color: white;
-            text-align: center;
             font-family: Arial, sans-serif;
-            padding: 20px;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffccd5, #ff9eb6, #ffc8dd, #d8bbff, #cdb4db);
+            animation: backgroundAnimation 10s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes backgroundAnimation {
+            0% { background-position: left top; }
+            100% { background-position: right bottom; }
         }
         #player-container {
             display: none;
         }
+        #playButton {
+            background: rgba(255, 255, 255, 0.3);
+            color: black;
+            font-size: 1.5em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+        #playButton:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
-    <h1>Do not close this tab!</h1>
-    <p>Music is playing. Head back to the previous tab and continue with the website.</p>
-    
-    <button id="playButton">Play Music</button>
-    <div id="player-container">
-        <iframe id="musicPlayer" width="0" height="0" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+    <div>
+        <h1>Do not close this tab!</h1>
+        <p>Music is playing. Head back to the previous tab and continue with the website.</p>
+        <button id="playButton">Play Music</button>
+        <div id="player-container">
+            <iframe id="musicPlayer" width="0" height="0" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+        </div>
     </div>
     
     <script>
