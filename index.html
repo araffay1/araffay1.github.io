@@ -11,6 +11,7 @@
             margin: 0;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #ffccd5, #ff9eb6, #ffc8dd, #d8bbff, #cdb4db);
@@ -73,13 +74,17 @@
             margin-top: 10px;
             display: none;
         }
-    </style>
-    <script>
-        function openMusicTab() {
-            let musicTab = window.open("music.html", "_blank");
+        #music-button {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
         }
-        window.onload = openMusicTab;
-    </script>
+    </style>
 </head>
 <body>
     <div id="countdown-container">
@@ -97,6 +102,8 @@
         <button id="submit-button" onclick="checkPassword()">Submit</button>
         <p id="error-message">Try again IK YK this</p>
     </div>
+    
+    <button id="music-button" onclick="openMusicTab()">Please press this before progressing</button>
     
     <script>
         const countdownElement = document.getElementById("countdown");
@@ -143,6 +150,10 @@
                 passwordInputs.forEach(input => input.value = "");
                 passwordInputs[0].focus();
             }
+        }
+        
+        function openMusicTab() {
+            window.open("music.html", "_blank");
         }
     </script>
 </body>
