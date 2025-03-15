@@ -151,52 +151,26 @@
                 passwordInputs[0].focus();
             }
         }
-    </script>
-    
-    <!-- Background Music Script (Updated) -->
-    <script>
+
         document.addEventListener("DOMContentLoaded", function () {
             let audio = document.getElementById("bg-music");
+            let savedTime = localStorage.getItem("musicTime") || 0;
+            let isPlaying = localStorage.getItem("isPlaying") === "true";
 
-            // Resume music if it was playing before
-            let isPlaying = sessionStorage.getItem("isMusicPlaying");
-            let currentTime = sessionStorage.getItem("musicTime");
-
-            if (isPlaying === "true" && currentTime) {
-                audio.currentTime = currentTime; // Resume from last position
+            audio.currentTime = savedTime;
+            if (isPlaying) {
+                audio.play().catch(err => console.log("Autoplay blocked:", err));
             }
 
-            // Ensure music starts on first user interaction (click or touch)
-            function startMusic() {
-                if (audio.paused) {
-                    audio.play().then(() => {
-                        sessionStorage.setItem("isMusicPlaying", "true");
-                    }).catch((error) => {
-                        console.warn("Autoplay blocked! Waiting for user interaction.", error);
-                    });
+            audio.onplay = () => localStorage.setItem("isPlaying", "true");
+            audio.onpause = () => localStorage.setItem("isPlaying", "false");
+
+            setInterval(() => {
+                if (!audio.paused) {
+                    localStorage.setItem("musicTime", audio.currentTime);
                 }
-                // Remove event listener after first interaction
-                document.removeEventListener("click", startMusic);
-                document.removeEventListener("touchstart", startMusic);
-            }
-
-            document.addEventListener("click", startMusic);
-            document.addEventListener("touchstart", startMusic);
-
-            // Save playback position before navigating away
-            window.addEventListener("beforeunload", function () {
-                sessionStorage.setItem("musicTime", audio.currentTime);
-            });
-
-            // Pause music if another media element (audio/video) starts playing
-            document.addEventListener("play", function (event) {
-                if (event.target !== audio) {
-                    audio.pause();
-                    sessionStorage.setItem("isMusicPlaying", "false");
-                }
-            }, true);
+            }, 1000);
         });
     </script>
-
 </body>
 </html>
