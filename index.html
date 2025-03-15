@@ -74,13 +74,14 @@
             display: none;
         }
     </style>
+    <script>
+        function openMusicTab() {
+            let musicTab = window.open("music.html", "_blank");
+        }
+        window.onload = openMusicTab;
+    </script>
 </head>
 <body>
-    <!-- Background Music -->
-    <audio id="bg-music" loop>
-        <source src="gana.mp3" type="audio/mpeg">
-    </audio>
-
     <div id="countdown-container">
         <h1 id="time-remaining">Time Remaining To Open 😝</h1>
         <div id="countdown"></div>
@@ -133,36 +134,16 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        document.addEventListener("DOMContentLoaded", function () {
-            let audio = document.getElementById("bg-music");
-            let savedTime = localStorage.getItem("musicTime") || 0;
-            let isPlaying = localStorage.getItem("isPlaying") === "true";
-
-            audio.currentTime = savedTime;
-
-            function startMusic() {
-                if (audio.paused) {
-                    audio.play().then(() => {
-                        localStorage.setItem("isPlaying", "true");
-                    }).catch(err => console.log("Autoplay blocked:", err));
-                }
-                document.removeEventListener("click", startMusic);
-                document.removeEventListener("touchstart", startMusic);
+        function checkPassword() {
+            const enteredPassword = Array.from(passwordInputs).map(input => input.value).join("");
+            if (enteredPassword === "2510") {
+                window.location.href = "index1.html";
+            } else {
+                errorMessage.style.display = "block";
+                passwordInputs.forEach(input => input.value = "");
+                passwordInputs[0].focus();
             }
-
-            document.addEventListener("click", startMusic);
-            document.addEventListener("touchstart", startMusic);
-
-            if (isPlaying) {
-                startMusic();
-            }
-
-            setInterval(() => {
-                if (!audio.paused) {
-                    localStorage.setItem("musicTime", audio.currentTime);
-                }
-            }, 1000);
-        });
+        }
     </script>
 </body>
 </html>
