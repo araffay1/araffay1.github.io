@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Special Birthday Wish ✨</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffccd5, #ff9eb6, #ffc8dd, #d8bbff, #cdb4db);
+            background-size: 300% 300%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15),
+                        inset 0 0 20px rgba(255, 255, 255, 0.5);
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .message {
+            font-size: 1.8rem;
+            color: #6a4c93;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .top-emoji {
+            position: absolute;
+            top: 20px;
+            font-size: 2rem;
+            animation: topEmojiFloat 4s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes topEmojiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        .side-decoration {
+            position: absolute;
+            height: 100vh;
+            width: 100px;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 2rem 0;
+            z-index: 1;
+        }
+
+        .side-decoration.left {
+            left: 0;
+        }
+
+        .side-decoration.right {
+            right: 0;
+        }
+
+        .side-item {
+            font-size: 2rem;
+            animation: sideBounce 3s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 1s);
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+        }
+
+        @keyframes sideBounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top floating emojis -->
+    <span class="top-emoji" style="left: 15%;">✨</span>
+    <span class="top-emoji" style="left: 35%;">🎂</span>
+    <span class="top-emoji" style="left: 65%;">🎀</span>
+    <span class="top-emoji" style="left: 85%;">🌸</span>
+
+    <!-- Side decorations - left -->
+    <div class="side-decoration left">
+        <span class="side-item" style="--delay: 0.2;">💘</span>
+        <span class="side-item" style="--delay: 0.5;">💖</span>
+        <span class="side-item" style="--delay: 0.8;">😋</span>
+        <span class="side-item" style="--delay: 1.1;">✨</span>
+        <span class="side-item" style="--delay: 1.4;">😍</span>
+    </div>
+
+    <!-- Side decorations - right -->
+    <div class="side-decoration right">
+        <span class="side-item" style="--delay: 0.3;">🥳</span>
+        <span class="side-item" style="--delay: 0.6;">🥰</span>
+        <span class="side-item" style="--delay: 0.9;">🎀</span>
+        <span class="side-item" style="--delay: 1.2;">🌹</span>
+        <span class="side-item" style="--delay: 1.5;">💝</span>
+    </div>
+
+    <!-- Main container -->
+    <div class="glass-container floating" id="messageContainer">
+        <p class="message" id="initialMessage">Click me 🤓</p>
+        <p class="message hidden" id="secondMessage"> Yoo zynabbbbbbb sunaoooo kesii hooo soo i js wantedd to take a moment to tell u how much u and us means to me. zynab u have no idea how much important u are to me and my life, i wouldnt have been here if it wasnt for u istgg each day u motivated me to be better without even knowing it. Zynab bfr i met u everything was so bad likee playboy tha but the shit ykk bfr that that hurt me sm nd i used to be in a very bad state u brought me back u brought my smile back u are my happiness. Zynab my love ikk i mess up things really really badly bht gand karta hun nahi pata hota ke sahi kar raha hun ya nahi kabhi kabhi annoy bhi karta hun bhtt ziada tang bhi karta hun ikk ikkk butt still u jhel me u care for me zynabb i love u yaarr i lovee u. nd trust me plss trust me ion get hurt cuz of u if i overthing or if i cry or if i become jealous smtimes thats not me hurting thats js my love for u. zynab the moment i knew i love u i knew what i was getting into i knew its not always gonna be good nd happy i knew ke there are gonna be times that we dont udnerstand each other i knew its not gonna be ez i knew its gonna be messy smtimess butt onee thing i was sure of was thtat i love u and id choose u no matter what over everything id accept u everyday non stop id accept u, ur mood swings, ur anger, ur care, ur everything nd yesss maybe ion even make sense ii js hope u get me main kia keh raha hun. zynabb move on kesee karta yaar main sochta bhi tha to aese lagta tha jese cheat kar raha hun on my love on u nahi kar sakta tha yaar move on na ab kar sakta hun every second where am not with u or not talking to u feels so long nd id miss u sososoo muchu have no idea trust me. ikk ikk u dont deserve me u deserve way better u deserve all the love in the world ikk am not good enough for u butt idkkkk i js cant ive up on u i cant give up on us. zynab sweetheart i never meant to hurt u ksm see i js wanted u to be happy i wated u to have all the love and care nd trust me i never did anythn knowingly to hurt u ikki make u feel bad but zynabb aesa kuch nahi hay me doing efforts for u or anythn its not ke i expect u to do the same ur existence nd not leaving me iss more than i can even ask for but phir bhii u do remember wo card eid wala zynab wallahi that was the best thing i ever got from any1. nddd nahii yaarrr its not about dating or js a rls ye sirf iske liye nahi hay ion wanna use u or js time pass zynab ksmm see everytime id raise my hands to pray id pray for u id pray to allah to be written. Zynab ye mene kabhi socha bhi nahi tha ke main kisi ke liye itna bhi karunga nd sab kuch but for u i wanted to try i wanted to not give up even if u never like me back or anythn ik u might never like me back patani commitment bhi kiun ki thi ullu 😭😭. idkk mene aesa kiya kia tha to change ur mind ikk meri ghalti hogi koi but am sorrryy for it. Khair bara time kha lia hay mene apka aur bhi wishes hongi and stories u have to attend to. ndd han ahn ive smth else for u wo alag se dunga ive been trying on it kafi time se asw idk if i was able to get it on ur bday or not but since yk am frnds with annural khalids brother yaad hay wo dairy milk wala ai wala gana tab mene socha tha ke ye karwaunga ive been planning to get a video msg from her wishing u bday nd singing apka fav gana for a min letss see if i am able to do it if not then am sosososo sorrryy. idkkk when i give u this am in isb or not shyd na hi hun but i wish main hotaa is dafa mene socha wa tha ke 12 baje apke ghar ke karee bahir fireworks karunga remember aik dafa idea bhi sunaya tha butt kismat hi kharab hay itna kuch socha wa tha for this year nd vacations kuch ni kar saka. Khair lmkkk kesa laga apko ye sab website nd all id be waiting for ur reply i hope u likee itt ndd plslsl dont feel bad or anythnnn i love u zynab u are the loml and nthn on this world can change that 💕💕  </p> 
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const messageContainer = document.getElementById('messageContainer');
+            const initialMessage = document.getElementById('initialMessage');
+            const secondMessage = document.getElementById('secondMessage');
+
+            messageContainer.addEventListener('click', () => {
+                gsap.to(initialMessage, {
+                    opacity: 0,
+                    y: -20,
+                    duration: 0.5,
+                    onComplete: () => {
+                        initialMessage.classList.add('hidden');
+                        secondMessage.classList.remove('hidden');
+                        gsap.fromTo(secondMessage, 
+                            {opacity: 0, y: 20},
+                            {opacity: 1, y: 0, duration: 0.5}
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Button</title>
+    <style>
+        .next-button {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            background: transparent; /* Matches page background */
+            border: 1px solid #000; /* Adjust border color if needed */
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 10px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <a href="memories.html" class="next-button">Next →</a>
+</body>
+</html>
