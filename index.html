@@ -113,8 +113,7 @@
         const passwordInputs = document.querySelectorAll(".password-input");
         const errorMessage = document.getElementById("error-message");
 
-        // Changed targetDate to 10 seconds from now
-        const targetDate = new Date().getTime() + 10000;
+        const targetDate = new Date("October 25, 2025 00:00:00").getTime();
         
         function updateCountdown() {
             const now = new Date().getTime();
@@ -131,9 +130,12 @@
                 return;
             }
 
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
             
-            countdownElement.innerHTML = `${seconds}s`;
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
         
         setInterval(updateCountdown, 1000);
