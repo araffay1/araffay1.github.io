@@ -1,6 +1,6 @@
 body {
     height: 96vh;
-    background-image: url('background1.jpg');
+    background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -283,5 +283,6 @@ p {
     margin-left: 150px;
 
 }
+
 
 
